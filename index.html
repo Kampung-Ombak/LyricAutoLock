@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#16052d">
+    <meta name="application-name" content="LYRIC AUTO LOCK">
+
+    <script type="application/manifest+json" id="pwaManifest">
+{"id":"./","name":"LYRIC AUTO LOCK","short_name":"LYRIC AUTO LOCK","description":"Aplikasi pengolah lirik dan fonetik untuk LYRIC AUTO LOCK.","start_url":"./","scope":"./","display":"standalone","orientation":"any","background_color":"#080312","theme_color":"#16052d","icons":[{"src":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAAEZ0lEQVR4nO3cMY4TSRiG4R7EhJtyCwISEsI9AEJCcAgkciJERL4Sh1i0EuIAG5KQcBhCEgJLjRkba/BX9Ve1eZ5oxGBPj/vlr3KrzdW96/sLnOvO6ANg2wREREBEBEREQEQERERARAREREBEBEREQEQERERARAREREBEBEREQEQERERARAREREBEBEREQETujj6AI96//jL6EOb17M2D0Yfwk6tJPlgomjPMENP4gKQTGpvRsIBOdPPi7ZPKI9mWd68+/OpbQ0oaE9BhPaI5w2FM9Q1VBySd5sZmVBrQjXqk09CNjMoaqgtovx7pdLKfUU1DRRcS1VNj/7WteXtbEZB6KhU31H0JW38H6RRbl7Oua1nfCaSegdbXvOsc6hiQS8zz6HcuegVk3zODgv1Q9020esbq/fp3CcjWZypdN0PtA7L1mVnzs9NxCTN+5tHvXLillUjjgOx+ptVpJ2QCEWkZkPEzuR5DyAQiIiAiM34u7LTPnz6e/diHjx43PBKWhhOoZgOU1JM//AI03wZtaQlrcvo11NaWAmJCAiIiICICIiIgIgIiIiAiAiIiICICIiIgIgIiIiAiAiIiICICIiIgIgIiIiAiAiIiICICIiIgIgIiIiAiAiIiICICIiIgIgIiIiAiAiIiICICIiIgIgIiIiAiAiIiICICIiIgIgIiIiAiAiIiICICIiIgIgIiIiAiAiIiICICIiIgIgIiIiAiAiIiICICIiIgIgIiIiAiAiJyd/QB8MP/L/87/MO//3lafyS3J6DxjnZz+N05SxLQSKfTOfqXZ8vIHmiY36onfFQ/JtAAYQRTjSITqFqrETLJKPoTJ9DnTx8H/vSv/34b+NObM4FKta1nhiEkoDo9Zs/whgREREBF+m19xg4hAREREBEBVej91n3gKiYgIgIiIiAiAiIiICICIiKgCn89v+76/APvDRIQEQEREVCRfqvY2HtbBUREQHV6DKHht9ZvKaCHjx6PPoRU24aG17NsK6DlIhq6MNv7VMYFNNTk7osZxs+yxYAuwO7cn53RJOnsbGwJuyTndTBVPcuyXN27vt/qud6//rL74sXbJ62e809wy1HUJJ13rz7svnj25kH+bIslbAZrGf5/ICKTt3KUPRCRlgGty+q60DKV5hugxQQi1DggQ2haPcbPYgIR6hiQITSPfueifUBtJyRtNT87XSaQndBUOu1+drrvgTQ0Vu/Xv1dA+7FraJT9V77T1qLjBLIZmke/c9F3CbMZGqjr1mfV8naOX1lv81jc6VGiYOVaVVxItB+qVFnPUnYlWkM1iutZapaw1f5atljOmrrxz7LsHUxpQMtBQ4uMYocTvfL9b3VAOzJqYmw6O2MCWo41tBLTCSd2kEMuvA0LaHWiJG5j7AXb8QHtyOgMM1zrnyWgfWI6YYZo9s0YEBvillYiAiIiICICIiIgIgIiIiAiAiIiICICIiIgIgIiIiAiAiIiICICIiIgIgIiIiAiAiIiICICIvIdLX4pJr48JuEAAAAASUVORK5CYII=","sizes":"192x192","type":"image/png","purpose":"any"},{"src":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAIAAAB7GkOtAAANU0lEQVR4nO3dP44cZRrA4fbKDjf1LRw4ISHkAAhp5T0EErkj5IgcyYdYhIQ4ACEJCYfZcJMN2us1nv5T3V3dVfX9nie0zPhDnnp/9VbNjJ+9fPFqB0DP35Y+AADLEACAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIh6vvQBOOOn7/9c+ghwvTfvXi99BI569vLFq6XPwAdmPRGqsBICsDBDnzgxWJAALMDQh4PE4MEE4HHMfZhICR5DAO7O3IerKcFdCcAdGf0wCxm4EwGY37xz/9sfvpnxo8GDvX/7y4wfTQnmJQBzun30G/cM7/YkyMBcBGAeV49+E5+4q3sgA7cTgBlcMf3NffjMFSXQgBsJwE0uHf3mPpx1aQlk4GoCcKWLRr+5D1e4qAQycAUBuMb06W/0w42mZ0ADLiUAlzH6YREycA8CcIGJ09/ohzuZmAENmEgAppoy/Y1+eIApGdCAKQTgPKMfVkgGbuefhDzD9Id1mnLd+Xlcp9kATjn72WP0w+LOrgL2gGNsAEeZ/rAJZ69Ee8AxNoDDTn/GGP2wQqdXAXvAUwLwOTf+sF0eB13EI6C/MP1h0zwOuogN4P889oFheBw0hQ3gA9MfRnL6mrUH7AnAeaY/bJEr9ywB2O1O3g74HILtOnH9WgJ2ArAz/WFoGnBCPQCmPwxPA45JB8D0hwgNOKgbANMfUjTgqW4AjjH9YVSu7s9EA3As+D4/YGzHrvHmElAMQPNvGjgtOBlyAfDoH+K8DPgoF4BjTH/ocL3vtQLg0T+w52XALhWA1N8rcLXOrAgF4Bi3/9Dk2q8EwMMf4Kn4g6BKAAD4TCIAbv+BY8pLwPgBMP2B07INGD8AABw0eADc/gNTNJeAwQMAwDEjB8DtPzBdcAkYOQAAnJALgNt/4JjafBg2AANvbcCDjTpPhg3AQbW8A5dKTYkxAzBqroGlDDlVxgzAQamwA1frzIpQAAD41IABGHJTAxY33mwZMAAHdXY64HaRiVEJAACfGS0A4+1owHoMNmFGC8BBkW0OmFFhbiQCAMBTAgAQ9ezli1dLn2E2Bx/PFfa4E/74/delj/C5L778eukjwFTv3/7y9BffvHv9+JPcw/OlD8C9rHD07+0PJgOwOI+AxrTa6f/R+k8IwxOAAW1ltm7lnDCqcQIw2NfnXm1bU3Vbp4W9YabNOAE4qPYGeIvzdItnpmPsGTJ4AAA4RgDGsd1b6e2eHDZNAACiBAAgSgAAogYJgB8CAdzJwUkyxleCDhIAAC4lAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFHPlz4AsHa/fffzxN/51Y//uOtJmJcAAAdMH/rH/isxWD8BAD64buhP+WhisE4CAMw8+o99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","sizes":"512x512","type":"image/png","purpose":"any"}]}
+    </script>
+    <script>
+      (() => {
+        const manifestNode = document.getElementById('pwaManifest');
+        if (!manifestNode) return;
+        const manifestBlob = new Blob([manifestNode.textContent], { type: 'application/manifest+json' });
+        const manifestUrl = URL.createObjectURL(manifestBlob);
+        const manifestLink = document.createElement('link');
+        manifestLink.rel = 'manifest';
+        manifestLink.href = manifestUrl;
+        document.head.appendChild(manifestLink);
+      })();
+    </script>
+
+    <title>LYRIC AUTO LOCK — Neon Purple</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #080312;
+            color: #f3e8ff;
+            background-image: radial-gradient(ellipse at 15% 10%, rgba(126, 34, 206, .22), transparent 42%),
+                              radial-gradient(ellipse at 85% 90%, rgba(192, 38, 211, .16), transparent 42%);
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #18181b; 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3f3f46; 
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #52525b; 
+        }
+
+        .scanline {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(192, 132, 252, 0.55);
+            box-shadow: 0 0 10px rgba(192, 132, 252, 1);
+            opacity: 0;
+            z-index: 20;
+            pointer-events: none;
+        }
+        
+        @keyframes scan {
+            0% { top: 0; opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+        
+        .scanning .scanline {
+            animation: scan 1s ease-in-out;
+        }
+        .app-shell { border-color: rgba(168, 85, 247, .45) !important; box-shadow: 0 0 35px rgba(126,34,206,.18), 0 0 90px rgba(192,38,211,.10); }
+        .neon-title { color: #f5d0fe; text-shadow: 0 0 10px rgba(216,180,254,.8), 0 0 28px rgba(168,85,247,.65); }
+        @media (max-height: 800px) and (min-width: 900px) {
+            body { align-items: flex-start; }
+            .app-shell { padding: 14px !important; gap: 12px !important; }
+            #inputText, #outputText { height: 245px !important; }
+            .scanline { height: 3px; }
+        }
+        @media (max-width: 900px) {
+            #inputText, #outputText { height: 280px; }
+        }
+        button { -webkit-tap-highlight-color: transparent; }
+        button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid #c084fc; outline-offset: 2px; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-3 md:p-3 relative overflow-x-hidden">
+
+    <div class="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] bg-violet-900/25 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-fuchsia-900/15 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="app-shell bg-zinc-950/85 backdrop-blur-xl rounded-3xl shadow-2xl border border-zinc-800 w-full max-w-6xl p-4 md:p-5 flex flex-col gap-4 relative z-10">
+        
+        <div class="flex flex-col items-center justify-center gap-2 relative z-10 border-b border-zinc-800 pb-4 text-center">
+            <button id="installBtn" type="button" class="absolute right-0 top-0 inline-flex items-center gap-1.5 rounded-lg border border-violet-500/60 bg-violet-950/70 px-2.5 py-1.5 text-[11px] font-bold text-violet-200 shadow-[0_0_12px_rgba(168,85,247,.25)] transition hover:bg-violet-800/80 hover:text-white" title="Pasang aplikasi di PC">
+                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg>
+                Instal
+            </button>
+            <div>
+                <h1 class="text-3xl md:text-4xl font-black tracking-tight flex items-center justify-center gap-3">
+                    <span class="neon-title">LYRIC AUTO LOCK</span>
+                </h1>
+            </div>
+            
+            <div class="flex items-center justify-center gap-2 bg-black border border-zinc-800 px-4 py-1.5 rounded-full shadow-inner mt-1">
+                <div class="w-2 h-2 rounded-full bg-violet-500 animate-pulse shadow-[0_0_8px_rgba(168,85,247,0.9)]"></div>
+                <span class="text-[10px] font-bold text-violet-500 tracking-widest uppercase">Engine Ready</span>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-4 items-stretch relative z-10 mt-1">
+            
+            <div class="flex flex-col gap-3 w-full lg:w-1/2 relative group">
+                <div class="flex justify-between items-center px-1 h-6">
+                    <label for="inputText" class="font-semibold text-zinc-400 text-sm uppercase tracking-wider flex items-center gap-2">
+                        <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        Lirik Asli
+                    </label>
+                    <div class="flex gap-3">
+                        <button id="formatTagBtn" class="text-xs text-violet-400 hover:text-violet-300 transition-colors font-semibold flex items-center gap-1 bg-violet-900/30 px-2 py-0.5 rounded border border-violet-800/50" title="Terapkan struktur lagu profesional otomatis (Verse, Chorus, Pre-Chorus, Guitar Solo, dll)">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" clip-rule="evenodd" /></svg>
+                            Auto-Tag
+                        </button>
+                        <button id="clearBtn" class="text-xs text-zinc-500 hover:text-fuchsia-300 transition-colors">
+                            Bersihkan
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="flex gap-2 h-[42px]">
+                    <div class="relative w-full h-full">
+                        <input type="text" id="searchQuery" class="w-full h-full bg-zinc-900/80 border border-zinc-700/50 rounded-xl px-4 text-sm text-zinc-200 focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition outline-none placeholder-zinc-600" placeholder="Cari judul lagu / artis (Misal: Shape of You)...">
+                        <div id="searchLoading" class="absolute right-3 top-1/2 -translate-y-1/2 hidden">
+                            <div class="w-4 h-4 border-2 border-violet-500 border-t-transparent rounded-full animate-spin shadow-[0_0_8px_rgba(168,85,247,0.9)]"></div>
+                        </div>
+                    </div>
+                    <button id="searchBtn" class="h-full bg-zinc-800 hover:bg-violet-900 text-violet-400 hover:text-violet-300 border border-zinc-700 hover:border-violet-500 px-4 rounded-xl transition-colors font-semibold flex items-center justify-center min-w-[80px] shadow-sm">
+                        Cari
+                    </button>
+                </div>
+
+                <div class="relative w-full">
+                    <textarea id="inputText" class="w-full h-[290px] p-4 pb-9 bg-zinc-900/60 border border-zinc-700/50 rounded-2xl focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition resize-none overflow-y-auto text-zinc-200 placeholder-zinc-600 font-medium leading-relaxed" placeholder="Masukkan atau tempel lirik di sini..."></textarea>
+                    
+                    <div class="absolute bottom-4 right-4 text-xs font-mono text-zinc-400 pointer-events-none bg-zinc-950/90 px-2.5 py-1 rounded-md border border-zinc-800/80 shadow-sm backdrop-blur-md">
+                        <span id="charCount">0</span> karakter
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-between bg-zinc-900/80 border border-zinc-800 p-3 rounded-xl mt-auto">
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="sunoShield" checked class="w-4 h-4 text-violet-500 bg-zinc-800 border-zinc-700 rounded focus:ring-violet-500">
+                        <label for="sunoShield" class="text-xs font-semibold text-zinc-300 cursor-pointer select-none">Suno Anti-Copyright Shield</label>
+                    </div>
+                    <span class="text-[10px] bg-violet-950 text-fuchsia-300 border border-violet-800/60 px-2 py-0.5 rounded font-mono shadow-[0_0_5px_rgba(220,38,38,0.2)]">Anti-Block</span>
+                </div>
+            </div>
+
+            <div class="flex lg:flex-col justify-center items-center py-2 lg:py-0">
+                <button id="convertBtn" 
+                    class="relative group bg-zinc-800 hover:bg-zinc-700 text-white p-4 rounded-2xl border border-zinc-700 hover:border-violet-500 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-violet-500/30 lg:rotate-90 flex items-center justify-center overflow-hidden shadow-xl" title="Konversi Fonetik">
+                    <div class="absolute inset-0 bg-gradient-to-r from-violet-600/30 to-fuchsia-500/25 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 transform lg:-rotate-90 relative z-10 text-violet-400 group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="flex flex-col gap-3 w-full lg:w-1/2 relative" id="outputPanel">
+                <div class="scanline"></div>
+
+                <div class="flex justify-between items-center px-1 h-6">
+                    <label for="outputText" class="font-semibold text-violet-400 text-sm uppercase tracking-wider flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        Hasil Fonetik
+                    </label>
+                    <span class="text-[10px] text-violet-600 tracking-widest font-mono uppercase font-bold">Siap Suno AI</span>
+                </div>
+                
+                <div class="flex gap-2 h-[42px]">
+                    <button id="playBtn" class="flex-1 flex items-center justify-center gap-1.5 bg-zinc-800 hover:bg-violet-900/50 text-violet-400 hover:text-violet-300 rounded-xl border border-zinc-700 transition-colors text-xs font-semibold" title="Dengarkan Suara">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                        </svg>
+                        Audio
+                    </button>
+                    
+                    <button id="stopBtn" class="hidden flex-1 flex items-center justify-center gap-1.5 bg-zinc-800 hover:bg-fuchsia-950/60 text-fuchsia-300 hover:text-red-300 rounded-xl border border-violet-800/60 transition-colors text-xs font-semibold" title="Hentikan Suara">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clip-rule="evenodd" />
+                        </svg>
+                        Stop
+                    </button>
+
+                    <button id="downloadBtn" class="flex-1 flex items-center justify-center gap-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white rounded-xl border border-zinc-700 transition-colors text-xs font-semibold" title="Unduh File .txt">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        Unduh
+                    </button>
+
+                    <button id="copyBtn" class="flex-[1.2] flex items-center justify-center gap-1.5 bg-violet-600 hover:bg-violet-500 text-black rounded-xl transition-colors text-xs font-bold shadow-[0_0_14px_rgba(168,85,247,0.55)]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        Salin
+                    </button>
+                </div>
+                
+                <div class="relative w-full">
+                    <textarea id="outputText" class="w-full h-[290px] p-4 bg-zinc-900/60 border border-zinc-700/50 rounded-2xl focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500 transition resize-none overflow-y-auto text-violet-100 font-mono text-sm leading-relaxed placeholder-zinc-700" placeholder="[ Teks fonetik anti-copyright akan dirender di sini... ]" readonly></textarea>
+                        
+                    <div id="copyToast" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-violet-500 text-black font-bold shadow-[0_0_18px_rgba(217,70,239,0.65)] text-sm py-2 px-6 rounded-full opacity-0 transition-opacity duration-300 pointer-events-none z-20">
+                        BERHASIL DISALIN!
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between bg-zinc-900/80 border border-zinc-800 p-3 rounded-xl mt-auto">
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-4 flex items-center justify-center">
+                            <div class="w-2 h-2 bg-violet-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(168,85,247,0.8)]"></div>
+                        </div>
+                        <span class="text-xs font-semibold text-zinc-300 select-none">Status Output Fonetik</span>
+                    </div>
+                    <span class="text-[10px] bg-violet-950 text-violet-400 border border-violet-900/50 px-2 py-0.5 rounded font-mono shadow-[0_0_5px_rgba(6,182,212,0.2)]">Standby</span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+
+    <div id="installModal" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/75 p-4">
+        <div class="w-full max-w-sm rounded-2xl border border-violet-500/50 bg-[#10071f] p-5 text-violet-100 shadow-[0_0_35px_rgba(168,85,247,.25)]">
+            <div class="mb-2 flex items-center justify-between">
+                <h2 class="text-base font-extrabold text-fuchsia-200">Instal LYRIC AUTO LOCK</h2>
+                <button id="closeInstallModal" class="rounded-lg px-2 py-1 text-xl text-violet-300 hover:bg-violet-900/60" aria-label="Tutup">&times;</button>
+            </div>
+            <p class="mb-3 text-sm text-violet-100/90">Manifest PWA sudah ditanam langsung di file index ini. Agar tombol Instal bekerja, aplikasi harus dibuka melalui alamat <b>HTTPS</b> atau <b>localhost</b> (bukan klik file HTML langsung):</p>
+            <ol class="list-decimal space-y-2 pl-5 text-sm text-violet-100/90">
+                <li>Letakkan <b>index.html</b> dan <b>sw.js</b> dalam satu folder.</li>
+                <li>Jalankan folder melalui server lokal (localhost) atau hosting HTTPS.</li>
+                <li>Buka alamatnya di <b>Google Chrome atau Microsoft Edge</b>.</li>
+                <li>Klik tombol <b>Instal</b> di pojok kanan atas.</li>
+            </ol>
+            <p class="mt-3 text-xs text-violet-300/80">File <b>sw.js</b> wajib berada di folder yang sama. Browser tidak mengizinkan Service Worker dijalankan dari file://; ini aturan keamanan PWA.</p>
+            <button id="closeInstallModal2" class="mt-4 w-full rounded-xl bg-violet-600 px-4 py-2 text-sm font-bold text-white hover:bg-violet-500">Mengerti</button>
+        </div>
+    </div>
+
+    <script>
+
+
+        // PWA service worker: aktif hanya pada HTTPS atau localhost.
+        if ('serviceWorker' in navigator &&
+            (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').catch((err) => {
+                    console.warn('Service Worker gagal didaftarkan:', err);
+                });
+            });
+        }
+
+        let deferredInstallPrompt = null;
+        const installBtn = document.getElementById('installBtn');
+        const installModal = document.getElementById('installModal');
+
+        window.addEventListener('beforeinstallprompt', (event) => {
+            event.preventDefault();
+            deferredInstallPrompt = event;
+            installBtn.title = 'Instal aplikasi';
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredInstallPrompt) {
+                deferredInstallPrompt.prompt();
+                await deferredInstallPrompt.userChoice;
+                deferredInstallPrompt = null;
+                return;
+            }
+            installModal.classList.remove('hidden');
+            installModal.classList.add('flex');
+        });
+
+        function closeInstallHelp() {
+            installModal.classList.add('hidden');
+            installModal.classList.remove('flex');
+        }
+        document.getElementById('closeInstallModal').addEventListener('click', closeInstallHelp);
+        document.getElementById('closeInstallModal2').addEventListener('click', closeInstallHelp);
+        installModal.addEventListener('click', (event) => {
+            if (event.target === installModal) closeInstallHelp();
+        });
+
+        const inputText = document.getElementById('inputText');
+        const outputText = document.getElementById('outputText');
+        const convertBtn = document.getElementById('convertBtn');
+        const formatTagBtn = document.getElementById('formatTagBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const copyToast = document.getElementById('copyToast');
+        const clearBtn = document.getElementById('clearBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const playBtn = document.getElementById('playBtn');
+        const charCount = document.getElementById('charCount');
+        const outputPanel = document.getElementById('outputPanel');
+        const sunoShield = document.getElementById('sunoShield');
+        const stopBtn = document.getElementById('stopBtn');
+        
+        const searchQuery = document.getElementById('searchQuery');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchLoading = document.getElementById('searchLoading');
+
+        inputText.addEventListener('input', () => {
+            charCount.textContent = inputText.value.length;
+        });
+
+        clearBtn.addEventListener('click', () => {
+            inputText.value = '';
+            outputText.value = '';
+            searchQuery.value = '';
+            inputText.placeholder = "Masukkan atau tempel lirik di sini...";
+            charCount.textContent = '0';
+            inputText.focus();
+        });
+
+        // Pencarian lirik online: LRCLIB dengan identitas aplikasi sesuai dokumentasi.
+        async function fetchLyricsFrom(url, timeoutMs = 15000, identifyClient = false) {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+            try {
+                const headers = { "Accept": "application/json" };
+                // LRCLIB meminta identitas aplikasi. X-User-Agent adalah alternatif
+                // yang didukung untuk JavaScript browser yang tidak dapat mengubah User-Agent.
+                if (identifyClient) headers["X-User-Agent"] = "LYRIC AUTO LOCK/1.1 (browser HTML app)";
+                const response = await fetch(url, {
+                    method: "GET",
+                    headers,
+                    signal: controller.signal,
+                    cache: "no-store",
+                    mode: "cors"
+                });
+                if (!response.ok) {
+                    let detail = "";
+                    try {
+                        const body = await response.text();
+                        if (body) detail = " — " + body.slice(0, 140).replace(/\s+/g, " ");
+                    } catch (_) {}
+                    throw new Error(`HTTP ${response.status}${detail}`);
+                }
+                const data = await response.json();
+                if (!Array.isArray(data)) throw new Error("Format data tidak valid");
+                return data;
+            } finally {
+                clearTimeout(timeoutId);
+            }
+        }
+
+        async function performSearch() {
+            const query = searchQuery.value.trim();
+            if (!query) {
+                searchQuery.focus();
+                return;
+            }
+
+            searchLoading.classList.remove('hidden');
+            searchBtn.disabled = true;
+            searchBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            inputText.value = "";
+            outputText.value = "";
+            inputText.placeholder = "Menghubungkan ke internet dan mencari lirik...";
+            charCount.textContent = '0';
+
+            const apiUrl = `https://lrclib.net/api/search?q=${encodeURIComponent(query)}`;
+            const routes = [
+                { name: "LRCLIB", url: apiUrl, identify: true },
+                { name: "AllOrigins", url: `https://api.allorigins.win/raw?url=${encodeURIComponent(apiUrl)}`, identify: false },
+                { name: "CORS Proxy", url: `https://corsproxy.io/?url=${encodeURIComponent(apiUrl)}`, identify: false }
+            ];
+
+            let errors = [];
+            let foundTrack = null;
+            let searchedSuccessfully = false;
+
+            try {
+                for (const route of routes) {
+                    try {
+                        const data = await fetchLyricsFrom(route.url, 15000, route.identify);
+                        searchedSuccessfully = true;
+                        const tracks = data.filter(t => t && (t.plainLyrics || t.syncedLyrics));
+                        tracks.sort((a, b) => {
+                            const score = t => {
+                                const q = query.toLowerCase();
+                                const title = (t.trackName || "").toLowerCase();
+                                const artist = (t.artistName || "").toLowerCase();
+                                return (title === q ? 5 : (title.includes(q) || q.includes(title) ? 3 : 0))
+                                    + (artist && q.includes(artist) ? 2 : 0);
+                            };
+                            return score(b) - score(a);
+                        });
+                        if (tracks.length) {
+                            foundTrack = tracks[0];
+                            break;
+                        }
+                        // Server merespons normal, tetapi belum ada rekaman lirik yang cocok.
+                    } catch (error) {
+                        errors.push(`${route.name}: ${error.message || "koneksi gagal"}`);
+                        console.warn(`Pencarian melalui ${route.name} gagal:`, error);
+                    }
+                }
+
+                if (foundTrack) {
+                    let lyrics = foundTrack.plainLyrics || foundTrack.syncedLyrics || "";
+                    if (!foundTrack.plainLyrics && foundTrack.syncedLyrics) {
+                        lyrics = lyrics.replace(/^\s*\[\d{1,2}:\d{2}(?:[.:]\d{1,3})?\]\s*/gm, "");
+                    }
+                    inputText.value = lyrics.trim();
+                    inputText.placeholder = "Masukkan atau tempel lirik di sini...";
+                    charCount.textContent = inputText.value.length;
+                    searchQuery.value = [foundTrack.trackName, foundTrack.artistName]
+                        .filter(Boolean).join(" - ");
+                } else if (searchedSuccessfully) {
+                    inputText.placeholder = `Pencarian berhasil, tetapi lirik "${query}" tidak ditemukan di database. Coba judul dan nama artis yang lebih tepat.`;
+                } else {
+                    inputText.placeholder = `Semua jalur pencarian gagal. ${errors.join(" | ") || "Periksa koneksi internet."}`;
+                }
+            } catch (error) {
+                console.error("Error fetching lyrics:", error);
+                inputText.placeholder = `Terjadi kesalahan saat mencari lirik: ${error.message || "kesalahan tidak diketahui"}`;
+            } finally {
+                searchLoading.classList.add('hidden');
+                searchBtn.disabled = false;
+                searchBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        searchBtn.addEventListener('click', performSearch);
+        searchQuery.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.isComposing) {
+                e.preventDefault();
+                performSearch();
+            }
+        });
+
+        const dictionary = {
+            "you": "yuu", "love": "lav", "my": "mai", "me": "mii", "i": "ai", 
+            "heart": "haart", "beautiful": "byu-ti-ful", "night": "nait", 
+            "time": "taim", "is": "iz", "the": "de", "to": "tu", "we": "wii", 
+            "are": "aar", "your": "yor", "baby": "bey-bi", "girl": "gerl", 
+            "boy": "boi", "world": "werld", "know": "nou", "how": "hau",
+            "now": "nau", "why": "wai", "who": "huu", "what": "wat",
+            "when": "wen", "where": "wer", "always": "ol-weys", "never": "ne-ver",
+            "gonna": "ga-na", "wanna": "wa-na", "make": "meyk", "feel": "fiil",
+            "like": "laik", "just": "jas", "want": "won", "need": "niid",
+            "right": "rait", "light": "lait", "here": "hir", "there": "der",
+            "shape": "syeip", "of": "of", "shape of you": "syeip of yuu",
+            "yeah": "yee", "oh": "ou", "cause": "koz", "because": "bi-koz",
+            "through": "truu", "life": "laif", "smile": "smail", "eyes": "ais"
+        };
+
+        function getSimilarity(str1, str2) {
+            const set1 = new Set(str1.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/));
+            const set2 = new Set(str2.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/));
+            let intersection = 0;
+            set1.forEach(word => { if (set2.has(word) && word.length > 2) intersection++; });
+            const union = new Set([...set1, ...set2]).size;
+            return union === 0 ? 0 : intersection / union;
+        }
+
+        function formatOriginalLyrics(text) {
+            // Normalisasi baris baru dan spasi
+            text = text.replace(/\r\n/g, '\n').trim();
+            if (!text) return text;
+
+            // Bersihkan kata-kata pengantar chat (misal: "contohnya seperti ini,,,[Verse 1]")
+            text = text.replace(/^.*?(\[Verse|\[Chorus|\[Pre|\[Bridge|\[Intro|\[Outro|\[Solo)/is, '$1');
+
+            // Cek apakah lirik sudah memiliki tag (format [] atau format Teks:)
+            const hasTags = /\[.*?\]/.test(text) || /^(Verse|Chorus|Pre-Chorus|Bridge|Intro|Outro|Solo)[\s\d]*[:\-]?/im.test(text);
+
+            if (hasTags) {
+                // Konversi tag teks biasa ("Verse 1:") menjadi format kurung siku "[Verse 1]"
+                text = text.replace(/^(Verse\s*\d*|Chorus|Pre-Chorus|Bridge|Intro|Outro|Solo|Instrumental)[\s:\-]*$/gim, '[$1]');
+
+                let blocks = [];
+                let currentTag = "";
+                let currentLines = [];
+                
+                // Parsing baris per baris sangat akurat tanpa peduli format spasi antar bait
+                let lines = text.split('\n');
+                for (let i = 0; i < lines.length; i++) {
+                    let t = lines[i].trim();
+                    if (!t) continue; 
+                    
+                    if (t.startsWith('[') && t.endsWith(']')) {
+                        if (currentTag || currentLines.length > 0) {
+                            blocks.push({tag: currentTag, lines: currentLines});
+                        }
+                        currentTag = t;
+                        currentLines = [];
+                    } 
+                    else if (/^\[.*?\]/.test(t)) {
+                        let matched = t.match(/^\[.*?\]/)[0];
+                        if (currentTag || currentLines.length > 0) {
+                            blocks.push({tag: currentTag, lines: currentLines});
+                        }
+                        currentTag = matched;
+                        let remainder = t.substring(matched.length).trim();
+                        currentLines = remainder ? [remainder] : [];
+                    } 
+                    else {
+                        currentLines.push(t);
+                    }
+                }
+                
+                if (currentTag || currentLines.length > 0) {
+                    blocks.push({tag: currentTag, lines: currentLines});
+                }
+
+                // Rekonstruksi ke standar Suno AI
+                let result = [];
+                for (let block of blocks) {
+                    let tag = block.tag;
+                    if (tag) {
+                        tag = tag.replace(/\[\s*(.*?)\]/, (m, p1) => {
+                            let inner = p1.trim();
+                            inner = inner.toLowerCase().split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                            inner = inner.replace(/Pre Chorus|Prechorus/i, 'Pre-Chorus');
+                            return `[${inner}]`;
+                        });
+                        
+                        if (block.lines.length > 0) {
+                            result.push(tag + '\n' + block.lines.join('\n'));
+                        } else {
+                            if (tag.toLowerCase().includes('solo') && !tag.includes('with')) {
+                                result.push(tag + '\n[overdriven electric guitar solo with delay, dramatic string swells, heavy drum fills]');
+                            } else {
+                                result.push(tag);
+                            }
+                        }
+                    } else {
+                        if (block.lines.length > 0) {
+                            result.push(block.lines.join('\n'));
+                        }
+                    }
+                }
+                return result.join('\n\n');
+            }
+
+            // MODE AUTO: Jika teks polos tanpa tag sama sekali
+            const rawBlocks = text.split(/\n\s*\n/).filter(b => b.trim());
+            const cleanParagraphs = rawBlocks.map(b => b.trim()).filter(b => b.length > 0);
+            
+            let chorusIndices = [];
+            for (let i = 0; i < cleanParagraphs.length; i++) {
+                for (let j = i + 1; j < cleanParagraphs.length; j++) {
+                    if (getSimilarity(cleanParagraphs[i], cleanParagraphs[j]) > 0.45) {
+                        if (!chorusIndices.includes(i)) chorusIndices.push(i);
+                        if (!chorusIndices.includes(j)) chorusIndices.push(j);
+                    }
+                }
+            }
+
+            let result = [];
+            let verseCount = 1;
+            let hasAddedSolo = false;
+
+            for (let i = 0; i < cleanParagraphs.length; i++) {
+                let p = cleanParagraphs[i];
+                let assignedTag = "";
+
+                if (chorusIndices.includes(i)) {
+                    assignedTag = "[Chorus]";
+                } else {
+                    let isNextChorus = (i + 1 < cleanParagraphs.length && chorusIndices.includes(i + 1));
+                    
+                    if (isNextChorus) {
+                        assignedTag = "[Pre-Chorus]";
+                    } else if (i === 0) {
+                        assignedTag = "[Verse 1]";
+                    } else if (i === cleanParagraphs.length - 1 && cleanParagraphs.length > 2) {
+                        assignedTag = "[Outro]";
+                    } else if (i >= 3 && !hasAddedSolo && cleanParagraphs.length >= 6) {
+                        result.push("[Guitar Solo]\n[overdriven electric guitar solo with delay, dramatic string swells, heavy drum fills]");
+                        hasAddedSolo = true;
+                        verseCount++;
+                        assignedTag = `[Verse ${verseCount}]`;
+                    } else if (i > Math.floor(cleanParagraphs.length / 2) && !chorusIndices.includes(i) && cleanParagraphs.length >= 5 && !hasAddedSolo) {
+                        assignedTag = "[Bridge]";
+                        hasAddedSolo = true;
+                    } else {
+                        if (i > 0) verseCount++;
+                        assignedTag = `[Verse ${verseCount}]`;
+                    }
+                }
+
+                result.push(assignedTag + '\n' + p);
+            }
+
+            return result.join('\n\n');
+        }
+
+        function processAndTagLyrics(taggedText, useShield) {
+            const paragraphs = taggedText.split(/\n\s*\n/);
+            let result = [];
+            
+            for (let i = 0; i < paragraphs.length; i++) {
+                let p = paragraphs[i].trim();
+                if (!p) continue;
+
+                let lines = p.split('\n');
+                let tag = "";
+                
+                if (lines[0] && lines[0].trim().match(/^\[(.*?)\]$/)) {
+                    tag = lines[0].trim();
+                    lines.shift();
+                }
+                
+                let contentLines = [];
+
+                for (let line of lines) {
+                    if (!line.trim()) continue;
+                    
+                    if (line.trim().startsWith('[') && line.trim().endsWith(']')) {
+                        contentLines.push(line.trim());
+                        continue;
+                    }
+                    
+                    let words = line.split(/([ \.,!\?]+)/);
+                    let convertedLine = words.map(word => {
+                        if (word.trim() === '' || /^[\.,!\?]+$/.test(word)) return word;
+                        
+                        const pureWord = word.toLowerCase().replace(/[^a-z']/g, '');
+                        if (pureWord === '') return word;
+
+                        let phonetic = pureWord;
+                        if (dictionary[pureWord]) {
+                            phonetic = dictionary[pureWord];
+                        } else {
+                            phonetic = phonetic
+                                .replace(/tion/g, 'syen')
+                                .replace(/sion/g, 'syen')
+                                .replace(/ture/g, 'cer')
+                                .replace(/igh/g, 'ait')
+                                .replace(/ight/g, 'ait')
+                                .replace(/ough/g, 'ou')
+                                .replace(/augh/g, 'of')
+                                .replace(/au/g, 'aw')
+                                .replace(/aw/g, 'ow')
+                                .replace(/ee/g, 'ii')
+                                .replace(/oo/g, 'uu')
+                                .replace(/ea/g, 'ii')
+                                .replace(/ph/g, 'f')
+                                .replace(/ce/g, 's')
+                                .replace(/ci/g, 'si')
+                                .replace(/ck/g, 'k')
+                                .replace(/kn/g, 'n')
+                                .replace(/wr/g, 'r')
+                                .replace(/qu/g, 'kw')
+                                .replace(/wh/g, 'w');
+                        }
+
+                        if (useShield) {
+                            let shielded = '';
+                            for (let j = 0; j < phonetic.length; j++) {
+                                shielded += phonetic[j];
+                                if (j < phonetic.length - 1 && Math.random() > 0.3) {
+                                    shielded += '\u200B'; 
+                                }
+                                if (Math.random() > 0.8) {
+                                    if (phonetic[j] === 'a') shielded = shielded.slice(0, -1) + 'á';
+                                    else if (phonetic[j] === 'i') shielded = shielded.slice(0, -1) + 'í';
+                                    else if (phonetic[j] === 'u') shielded = shielded.slice(0, -1) + 'ú';
+                                    else if (phonetic[j] === 'e') shielded = shielded.slice(0, -1) + 'é';
+                                    else if (phonetic[j] === 'o') shielded = shielded.slice(0, -1) + 'ó';
+                                }
+                            }
+                            phonetic = shielded;
+                        }
+                        
+                        let resultWord = word.replace(new RegExp(pureWord, 'i'), phonetic);
+                        if (/^[A-Z]/.test(word)) {
+                            resultWord = resultWord.charAt(0).toUpperCase() + resultWord.slice(1);
+                        }
+                        return resultWord;
+                    });
+                    contentLines.push(convertedLine.join(''));
+                }
+
+                if (tag) {
+                    result.push(tag + '\n' + contentLines.join('\n'));
+                } else {
+                    result.push(contentLines.join('\n'));
+                }
+            }
+
+            return result.join('\n\n');
+        }
+
+        formatTagBtn.addEventListener('click', () => {
+            const originalText = inputText.value;
+            if (!originalText.trim()) return;
+            
+            inputText.style.opacity = '0.5';
+            
+            setTimeout(() => {
+                const formattedText = formatOriginalLyrics(originalText);
+                inputText.value = formattedText;
+                charCount.textContent = formattedText.length;
+                inputText.style.opacity = '1';
+            }, 200);
+        });
+
+        convertBtn.addEventListener('click', () => {
+            const originalText = inputText.value;
+            if (!originalText.trim()) return;
+
+            outputPanel.classList.add('scanning');
+            
+            setTimeout(() => {
+                const useShield = sunoShield.checked;
+                const phoneticText = processAndTagLyrics(originalText, useShield);
+                outputText.value = phoneticText;
+                outputPanel.classList.remove('scanning');
+            }, 400);
+        });
+
+        copyBtn.addEventListener('click', () => {
+            if (!outputText.value) return;
+            
+            outputText.select();
+            outputText.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                copyToast.style.opacity = '1';
+                setTimeout(() => {
+                    copyToast.style.opacity = '0';
+                }, 2000);
+            } catch (err) {
+                console.error('Gagal menyalin text: ', err);
+            }
+        });
+
+        downloadBtn.addEventListener('click', () => {
+            if (!outputText.value) return;
+            
+            const element = document.createElement('a');
+            const file = new Blob([outputText.value], {type: 'text/plain'});
+            element.href = URL.createObjectURL(file);
+            element.download = 'TNC7_Suno_Shield_Lyrics.txt';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        });
+
+        playBtn.addEventListener('click', () => {
+            const textToPlay = outputText.value;
+            if (!textToPlay.trim()) return;
+
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(textToPlay.replace(/-/g, ' '));
+            
+            const voices = window.speechSynthesis.getVoices();
+            const indonesianVoice = voices.find(voice => voice.lang.includes('id') || voice.lang.includes('ID'));
+            
+            if (indonesianVoice) {
+                utterance.voice = indonesianVoice;
+            }
+            
+            utterance.rate = 0.85; 
+
+            utterance.onend = () => {
+                playBtn.classList.remove('hidden');
+                stopBtn.classList.add('hidden');
+            };
+
+            playBtn.classList.add('hidden');
+            stopBtn.classList.remove('hidden');
+            
+            window.speechSynthesis.speak(utterance);
+        });
+
+        stopBtn.addEventListener('click', () => {
+            window.speechSynthesis.cancel();
+            playBtn.classList.remove('hidden');
+            stopBtn.classList.add('hidden');
+        });
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+        }
+
+    </script>
+</body>
+</html>
